@@ -3,12 +3,31 @@ import { asyncConfig, resolveAsyncConfigs } from "config/async";
 import { deferConfig } from "config/defer";
 import { raw } from "config/raw";
 
+declare module "config" {
+    interface UserConfig {
+        firstName: string;
+        lastName: string;
+        fullName: string;
+        info: {
+            country: string;
+            age: number;
+            isOlympicAthlete: boolean;
+        }
+    }
+}
+
 var class1: config.IConfig = config;
 
 var value1: string = config.get<string>("");
 var value2: any = config.get("");
 
 var has: boolean = config.has("");
+
+var stringReturnType: string = config.get('firstName');
+var numberReturnType: number = config.get('info.age');
+var backwardsCompatible: unknown = config.get('info.isTall');
+// @ts-expect-error Argument of type 'string' is not assignable to parameter of type 'string[]'
+var invalidReturnType: string = config.get('info.isOlympicAthlete');
 
 // util tests:
 var extended1: any = config.util.extendDeep({}, {});
