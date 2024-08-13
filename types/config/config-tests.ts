@@ -12,6 +12,19 @@ declare module "config" {
             country: string;
             age: number;
             isOlympicAthlete: boolean;
+            nest1: {
+                nest2: {
+                    anotherString: string;
+                    nest3: {
+                        anotherNumber: number;
+                        nest4: {
+                            nest5: {
+                                anotherBoolean: boolean;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -26,8 +39,9 @@ var has: boolean = config.has("");
 var stringReturnType: string = config.get('firstName');
 var numberReturnType: number = config.get('info.age');
 var backwardsCompatible: unknown = config.get('info.isTall');
-// @ts-expect-error Argument of type 'string' is not assignable to parameter of type 'string[]'
+// @ts-expect-error Type 'boolean' is not assignable to type 'string'
 var invalidReturnType: string = config.get('info.isOlympicAthlete');
+var deepValue: boolean = config.get('info.nest1.nest2.nest3.nest4.nest5.anotherBoolean');
 
 // util tests:
 var extended1: any = config.util.extendDeep({}, {});

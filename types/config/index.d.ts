@@ -1,4 +1,4 @@
-import { Paths, ObjectPathValue } from "./paths";
+import { Paths, PathValues } from "./paths";
 
 declare var c: c.IConfig;
 
@@ -75,7 +75,7 @@ declare namespace c {
     interface UserConfig {}
 
     interface IConfig {
-        get<T extends Paths<UserConfig>>(setting: T): ObjectPathValue<UserConfig, T>;
+        get<T extends Paths<UserConfig>>(setting: T): PathValues<UserConfig, T>;
         get<T>(setting: string): T;
         has(setting: string): boolean;
         util: IUtil;
